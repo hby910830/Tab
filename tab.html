@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tab插件</title>
+</head>
+<body>
+	<div class="tabs">
+        <ol class="tab-button">
+            <div class="container clearfix">
+                <li class="active">创建人脸识别库<span class="split"></span></li>
+                <li>人脸识别<span class="split"></span></li>
+                <li>图片搜索<span class="split"></span></li>
+                <li>轨迹追踪<span class="split"></span></li>
+                <li>案底追踪</li>
+            </div>
+        </ol>
+        <ol class="tab-content">
+            <li class="face-collection active clearfix">
+            </li>
+            <li class="face-recognition">         
+            </li>
+            <li class="face-submit">
+                <div>tab3</div>
+            </li>
+            <li class="face-search">
+                <div>tab4</div>
+            </li>
+        </ol>
+    </div>
+	<script>
+		!(function($){
+		  $.fn.tabs = function(_options){
+		    var defaultOptions = {
+		      activeClassName: 'active',
+		      tabsSelector: '.tabs',
+		      tabButtonSelector: '.tab-button',
+		      tabContentSelector: '.tab-content'
+		    };
+		    var options = $.extend({}, defaultOptions, _options);
+		    var $tabs = this;
+		    $tabs.each(function(index, dom){
+		      var $oneTab = $(dom);
+		      $oneTab.on('click', options.tabButtonSelector + ' li', function(e){
+		        var $li = $(e.target).addClass(options.activeClassName).siblings().removeClass(options.activeClassName);
+		        var index = $(this).index();
+		        $li.closest(options.tabsSelector).children(options.tabContentSelector).children('li')
+		          .eq(index).addClass(options.activeClassName).siblings().removeClass(options.activeClassName);
+		      })
+		    })
+		  };
+		  $('.tabs').tabs({
+		    // activeClassName: 'active',
+		    // tabsSelector: '.tabs',
+		    // tabButtonSelector: '.tab-button',
+		    // tabContentSelector: '.tab-content'
+		  });
+		})(jQuery);
+	</script>
+</body>
+</html>
